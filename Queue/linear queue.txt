@@ -1,0 +1,78 @@
+//Q.Linear Queue implementation
+#include<stdio.h>
+#define N 5
+int front=-1;
+int rare=-1;
+int queue[N];
+void enqueue(int x)
+{
+    if(rare==N-1)
+    {
+        printf("queueid is full");
+    }
+    else if(front==-1&&rare==-1)
+    {
+        front=rare=0;
+        queue[rare]=x;
+    }
+    else
+    {
+     rare++;
+     queue[rare]=x;
+    }
+}
+void dequeue()
+{
+    if(front==-1&&rare==-1)
+    { 
+        printf("queueis empty");
+    } 
+    else if(front==rare)
+    {
+        front=rare=-1;
+    }
+    for(int i=front;i<=rare;i++)
+    {
+        printf("\ndeleted data is\n%d",queue[front]);
+        front++;
+    }
+}
+void display()
+{
+    if(front==-1&&rare==-1)
+    {
+        printf("queue is empty");
+    }
+    for(int i=front;i<=rare;i++)
+    {
+     printf("%d\n",queue[i]);   
+    }
+}
+
+void peek()
+{
+    if(front==-1&&rare==-1)
+    {
+        printf("queue is empty");
+    }
+    else
+    {
+        printf("\npeek data is\n%d",queue[front]);
+    }
+}
+int main()
+{
+   
+         int value;
+         for(int i=1;i<=5;i++)
+         {
+             scanf("%d",&value);
+             enqueue(value);
+         }
+         display();
+         dequeue();
+         peek();
+}
+
+
+
