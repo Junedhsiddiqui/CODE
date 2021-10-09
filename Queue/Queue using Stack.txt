@@ -1,0 +1,111 @@
+//Queue uisng by stack..
+//JunedhSiddiqui[20011080]
+#include<stdio.h>
+#include<stdlib.h>
+int count=0;
+int s1[100],s2[100];
+int top1=-1,top2=-1;
+void push1(int element)
+{
+    int n;
+    if(top1==n-1)
+    {
+        printf("queue over flow..\n");
+    }
+    else
+    {
+        top1++;
+        s1[top1]=element;
+    }
+}
+void push2(int element)
+{
+    int n;
+    if(top2==n-1)
+    {
+        printf("queue over flow..\n");
+    }
+    else
+    {
+        ++top2;
+        s2[top2]=element;
+    }
+}
+int pop1()
+{
+    return s1[top1--];
+}
+int pop2()
+{
+    return s2[top2--];
+}
+void enqueue()
+{
+    int data,i;
+    printf("Enter the data:");
+    scanf("%d",&data);
+    push1(data);
+    count++;
+}
+void dequeue()
+{
+    int i,a,b;
+    if(top1==-1&&top2==-1)
+   {
+      printf("queue is empty..\n");
+   }
+    else
+     for(i=1;i<=count;i++)
+     {
+         a=pop1();
+         push2(a);
+     }
+     b=pop2();
+     printf("removed elements:%d\n",b);
+     count--;
+     for(i=1;i<=count;i++)
+     {
+         a=pop2();
+         push1(a);
+     }
+}
+void display()
+{
+   int i;
+   printf("elements in Queue are: ");
+   for(i=0;i<=top1;i++)
+   {
+       printf("%d ",s1[i]);
+   }
+}
+int main()
+{
+    int choice;
+    printf("\nQueue using stack..");
+    printf("\n1.enqueue");
+    printf("\n2.dequeue");
+    printf("\n3.display");
+    printf("\n4.exit");
+    printf("\n");
+    while(1)
+    {
+        printf("\nEnter your choice: ");
+        scanf("%d",&choice);
+        switch (choice)
+        {
+            case 1:
+            enqueue();
+            break;
+            case 2:
+            dequeue();
+            break;
+            case 3:
+            display();
+            break;
+            case 4:
+            exit(0);
+            default:
+            printf("\nInvalid choice\n");
+        }
+    }
+}
