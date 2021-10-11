@@ -1,0 +1,20 @@
+//Tower of Haoni
+//NAME=Junedhsiddiqui
+//SEC=B
+#include<stdio.h>
+void toH(int n,char S,char A,char D)
+{
+    if(n>0)
+    {
+       toH(n-1,S,D,A);
+       printf("move %c to %c\n",S,D);
+       toH(n-1,A,S,D);
+    }
+}
+int main()
+{
+   char a='S',b='A',c='D';
+   int n=3;
+   toH(n,a,b,c);
+   return 0;
+}
