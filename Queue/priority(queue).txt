@@ -1,0 +1,151 @@
+//Write a program to implement priority queue where each element is accociated with an priority number.
+//Here insertion will be done from rear counter but,deletion will be done based on priority.
+//NAME=Junedhsiddiqui
+//SEC=B
+#include <stdio.h>
+#include <stdlib.h>
+struct priorityqueue
+{
+    int r;
+    int *num;
+    int *priority;
+    int size;
+};
+int isempty(struct priorityqueue *pq)
+{
+    if (pq->r == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int isfull(struct priorityqueue *pq)
+{
+    if (pq->r == pq->size - 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void enqueue(struct priorityqueue *pq, int val, int p)
+{
+    if (isfull(pq))
+    {
+        printf("The queue is full\n");
+    }
+    else
+    {
+        pq->r++;    
+        pq->num[pq->r]=val;
+        pq->priority[pq->r] = p;
+    }
+}
+int gethighestpriority(struct priorityqueue *pq)
+{
+    int i, p;
+    p = -1;
+    if (!(isempty(pq)))
+    {
+        for (i = 0; i <= pq->r; i++)
+        {
+            if (pq->priority[i] > p)
+            {
+                p = pq->priority[i];
+            }
+        }
+    }
+    return p;
+}
+int deletehighestpriority(struct priorityqueue *pq)
+{
+    int i, j, x, a;
+    x = gethighestpriority(pq);
+    for (i = 0; i <= pq->r; i++)
+    {
+        if (pq->priority[i] == x)
+        {
+            a = pq->num[i];
+            break;
+        }
+    }
+    if (i < pq->r)
+    {
+        for (j = i; j < pq->r; j++)
+        {
+            pq->num[j] = pq->num[j + 1];
+            pq->priority[j] = pq->priority[j + 1];
+        }
+    }
+    pq->r--;
+    return a;
+}
+void display(struct priorityqueue *pq)
+{
+    int i;
+    printf("Priority queue: \n");
+    for (i = 0; i <= pq->r; i++)
+    {
+        printf("Element: %d Priority: %d\n", pq->num[i], pq->priority[i]);
+    }
+}
+
+int main()
+{
+    struct priorityqueue pq;
+    printf("Enter the size of your priority queue: ");
+    scanf("%d", &pq.size);
+    pq.r = -1;
+    pq.num = (int *)malloc(pq.size * sizeof(int));
+    pq.priority = (int *)malloc(pq.size * sizeof(int));
+    int ch, val, p;
+    do
+    {
+        printf("Press 1 to insert\nPress 2 to get highest priority\nPress 3 to delete\nPress 4 to display\nPress 5 to exit\n");
+        printf("Enter your choice\n");
+        scanf("%d", &ch);
+        switch (ch)
+        {
+        case 1:
+            printf("Enter element to insert: \n");
+            scanf("%d", &val);
+            printf("Enter priority: \n");
+            scanf("%d", &p);
+            enqueue(&pq, val, p);
+            break;
+        case 2:
+            if (isempty(&pq))
+            {
+                printf("The queue is empty\n");
+            }
+            else
+            {
+                p = gethighestpriority(&pq);
+                printf("The highest priority = %d\n", p);
+            }
+            break;
+        case 3:
+            if (isempty(&pq))
+            {
+                printf("Queue is empty\n");
+            }
+            else
+            {
+                val = deletehighestpriority(&pq);
+                printf("%d is deleted\n", val);
+            }
+            break;
+        case 4:
+            display(&pq);
+            break;
+
+        default:
+            break;
+        }
+    } while (ch != 5);
+}
