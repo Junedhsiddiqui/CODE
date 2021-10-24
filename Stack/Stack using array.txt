@@ -1,0 +1,79 @@
+
+//Name=JunedhSiddiqui
+//sec=B
+//stack using array.
+#include<stdio.h>
+#define N 5
+int stack [N];
+int top=-1;
+void push()
+{
+    int x;
+    printf("Enter data:");
+    scanf("%d",&x);
+    if(top==N-1)
+    {
+        printf("overflow..");
+    }
+    else
+    {
+        top++;
+        stack[top]=x;
+    }
+}
+void pop()
+{
+    int item;
+    if(top==-1)
+    {
+        printf("underflow");
+    }
+    else
+    {
+        item=stack[top];
+        top--;
+        printf("\nDelete Element is: %d\n",item);
+    }
+}
+void Peek()
+{
+    
+    if(top==-1)
+    {
+        printf("underflow");
+    }
+    else
+    {
+        printf("\nTop Element is %d\n",stack[top]);
+    }
+}
+void display()
+{
+    int i;
+    for(i=top;i>=0;i--)
+    {
+        printf(" %d",stack[i]);
+    }
+}
+int main ()
+{
+    int ch;
+ do
+  {
+     printf("\nchoice 1:Push\nchoice 2:Pop\nchoice 3:Peek\nchoice 4:display\nchoice 5:Exit\n");
+     scanf("%d",&ch);
+     
+     switch(ch)
+     {
+        case 1: push();
+                break;
+        case 2: pop();
+                break;
+        case 3: Peek();
+                break;
+        case 4: display();
+                break;
+        default: printf("Invalid choice..");
+     }
+    }while(ch!=5);
+}
