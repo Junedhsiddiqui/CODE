@@ -1,5 +1,6 @@
 //NAME=Junedh Siddiqui
 //SEC=B
+//Singly LinkedList
 #include<stdio.h>
 #include<stdlib.h>
 int main()
