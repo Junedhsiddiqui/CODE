@@ -1,0 +1,76 @@
+//JUNEDH SIDDIQUI
+//Sec=B
+//Doubly LinkedList Search the key value and delete it..
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+    struct node *prev;
+};
+struct node *deleteDuplicate(struct node* head,int key)
+{
+    struct node *b=head;
+   if(head->data==key)
+    {
+        head=NULL;
+    }
+    while(b->next!=NULL)
+    {
+        if(b->data==key)
+         {
+            b=b->next;
+            head=b;
+         }
+        else if(b->next->data==key)
+         {
+            b->next=b->next->next;
+         }
+         else
+         {
+           b=b->next;
+         }
+    }
+    return head;
+}
+void printNode(struct node *head)
+{
+    while (head != NULL)
+    {
+        printf("%d ", head->data);
+        head = head->next;
+    }
+    printf("\n");
+}
+int main()
+{
+    struct node *head, *newnode, *temp;
+    head=NULL;
+    int choice,num,key;
+    
+      while(choice)
+    {
+       newnode=(struct node *)malloc(sizeof(struct node));
+       printf("Enter data:");
+       scanf("%d",&newnode->data);
+       newnode->prev=NULL;
+       newnode->next=NULL;
+       if(head==NULL)
+       { head=temp=newnode; }
+       else
+       {
+         temp->next=newnode;
+         newnode->prev=temp;
+         temp=newnode;
+       }
+       printf("Do you want to continue(0,1)? ");
+       scanf("%d",&choice);
+    }  
+    printNode(head);
+    printf("Enter the key to delete:");
+    scanf("%d",&key);
+    head=deleteDuplicate(head,key);
+    printNode(head);
+}
+
