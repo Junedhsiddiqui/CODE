@@ -1,6 +1,6 @@
 //Junedh Siddiqui
 //Sec=B
-//Binary Tree Implementation
+//Binary Tree Implementation..(Preorder-Inorder-Postorder)
 #include<stdio.h>
 #include<stdlib.h>
 struct node
@@ -8,6 +8,36 @@ struct node
     int data;
     struct node *left,*right;
 };
+void Preorder(struct node *root)//in place of root we can write any other reference variable
+{
+    if(root==NULL)
+    {
+        return;
+    }
+    printf("%d",root->data);
+    Preorder(root->left);
+    Preorder(root->right);
+}
+void Inorder(struct node *root)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+    Inorder(root->left);
+    printf("%d",root->data);
+    Inorder(root->right);
+}
+void Postorder(struct node *root)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+    Postorder(root->left);
+    Postorder(root->right);
+    printf("%d",root->data);
+}
 struct node *create()
 {
     int x;
@@ -31,4 +61,10 @@ int main()
     struct node *root;
     root=NULL;
     root=create();
+    printf("Preorder:");
+    Preorder(root);
+    printf("\nInorder:");
+    Inorder(root);
+    printf("\nPostorder:");
+    Postorder(root);
 }
