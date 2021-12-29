@@ -8,7 +8,32 @@ struct node
     int data;
     struct node *left,*right;
 };
-struct node* inordersucc(struct node* root)
+void *insert(struct node *root,int num)
+{
+    struct node *newnode;
+    if(root==NULL)
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        newnode->data=num;
+        newnode->left=NULL;
+        newnode->right=NULL;
+        return newnode;
+    }
+    else
+    {
+        if(num<(root->data))
+        {
+           root->left = insert((root->left),num);
+        }
+    
+        else
+        {
+           root->right = insert((root->right),num);
+        }
+    }
+    return root;
+}
+void *inordersucc(struct node* root)
 {
     struct node* curr = root;
     while(curr && curr->left !=NULL)
@@ -17,7 +42,7 @@ struct node* inordersucc(struct node* root)
     }
     return curr;
 }
-struct node* delete(struct node* root,int key)
+void *delete(struct node* root,int key)
 {
     if(key<root->data)
     {
@@ -47,7 +72,7 @@ struct node* delete(struct node* root,int key)
     }
     return root;
 }
-struct node* search(struct node* root,int key)
+void *search(struct node* root,int key)
 {
     if(root == NULL)
     {
@@ -71,31 +96,6 @@ void inorder(struct node *root)
         printf("%d\n",root->data);
         inorder(root->right);
     }
-}
-void *insert(struct node *root,int num)
-{
-    struct node *newnode;
-    if(root==NULL)
-    {
-        newnode=(struct node*)malloc(sizeof(struct node));
-        newnode->data=num;
-        newnode->left=NULL;
-        newnode->right=NULL;
-        return newnode;
-    }
-    else
-    {
-        if(num<(root->data))
-        {
-           root->left = insert((root->left),num);
-        }
-    
-        else
-        {
-           root->right = insert((root->right),num);
-        }
-    }
-    return root;
 }
 
 int main() {
