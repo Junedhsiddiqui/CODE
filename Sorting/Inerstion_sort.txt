@@ -1,0 +1,45 @@
+//INSERTION_SORT
+#include <stdio.h>
+#define MAX 100
+
+void insertionSort(int arr[], int n)
+{
+  for(int i=1; i<n; i++) 
+  {
+    int temp = arr[i];
+    int j = i-1;
+    while(j>=0 && arr[j]>temp)
+    {
+      arr[j+1] = arr[j];
+      j--;
+    }
+    arr[j+1] = temp;
+  }     
+}
+
+void printarray(int arr[], int n) 
+{
+  for (int i=0; i<n; i++) 
+  {
+    printf("%d  ", arr[i]);
+  }
+  printf("\n");
+}
+
+int main() 
+{
+  int arr[MAX], n, m;
+  printf("Enter the limit of the array: ");
+  scanf("%d",&n);
+
+  printf("Enter the elements of the array: ");
+  for(m=0; m<n; m++)
+  {
+      scanf("%d",&arr[m]);
+  }
+
+  insertionSort(arr, n);
+  printf("Sorted array is: ");
+  printarray(arr,n);
+  return 0;
+}
