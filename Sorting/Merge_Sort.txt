@@ -1,0 +1,61 @@
+//MERGE_SORT
+#include <stdio.h>
+#define MAX 100
+
+void printarray(int arr[], int n) 
+{
+  for (int i=0; i<n; i++) 
+  {
+    printf("%d  ", arr[i]);
+  }
+  printf("\n");
+}
+
+merge(int arr[], int lb, int mid, int ub)
+{
+  int i=lb, j=mid+1, k=lb, arr2[MAX];
+  while(i<=mid && j<=ub)
+  {
+    if(arr[i]<arr[j])
+    {   arr2[k++]=arr[i++]; }
+    else
+    {  arr2[k++]=arr[j++]; }
+  }
+
+  for(; i<=mid; i++)
+   arr2[k++]=arr[i];
+  for(; j<=ub; j++)
+   arr2[k++]=arr[j];
+   //Now take all the values from arr to arr2.
+  for(k=lb; k<=ub; k++)
+  {
+    arr[k]=arr2[k];
+  }
+}
+
+mergesort(int arr[], int lb, int ub)
+{
+  if(lb<ub)
+  {
+    int mid=(lb+ub)/2;
+    mergesort(arr,lb,mid);
+    mergesort(arr,mid+1,ub);
+    merge(arr,lb,mid,ub);
+  }
+}
+int main() 
+{
+  int arr[MAX], n, m;
+  printf("Enter the limit of the array: ");
+  scanf("%d",&n);
+
+  printf("Enter the elements of the array: ");
+  for(m=0; m<n; m++)
+  {
+      scanf("%d",&arr[m]);
+  }
+
+  mergesort(arr, 0, n-1);
+  printf("Sorted array is: ");
+  printarray(arr,n);
+}

@@ -1,0 +1,60 @@
+//QUICK_SORT
+#include <stdio.h>
+#define MAX 100
+
+quicksort(int arr[], int lb, int ub)
+{
+  if(lb<ub)
+  {
+   int loc = parition(arr, lb, ub);
+    quicksort(arr, lb, loc-1);
+    quicksort(arr, loc+1, ub);
+  }
+}
+parition(int arr[], int lb, int ub)
+{
+  int pivot=arr[ub];
+  int i=(lb-1);
+
+  for(int j=lb; j<ub; j++)
+  {
+    if(arr[j]<=pivot)
+    {
+      i++;
+       int temp=arr[i];
+       arr[i]=arr[j];
+       arr[j]=temp;
+    }
+  }
+
+  int temp2=arr[i+1];
+  arr[i+1]=arr[ub];
+  arr[ub]=temp2;
+  return i+1;
+}
+
+void printarray(int arr[], int n) 
+{
+  for (int i=0; i<n; i++) 
+  {
+    printf("%d  ", arr[i]);
+  }
+  printf("\n");
+}
+
+int main() 
+{
+  int arr[MAX], n, m;
+  printf("Enter the limit of the array: ");
+  scanf("%d",&n);
+
+  printf("Enter the elements of the array: ");
+  for(m=0; m<n; m++)
+  {
+      scanf("%d",&arr[m]);
+  }
+
+  quicksort(arr, 0, n-1);
+  printf("Sorted array is: ");
+  printarray(arr,n);
+}
