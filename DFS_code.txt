@@ -1,0 +1,39 @@
+//DFS
+//Junedh_SiD
+
+
+#include<bits/stdc++.h>
+using namespace std;
+const int N=1e3+10;
+vector<int> g[N];
+bool vis[N];
+
+void dfs(int vertex)
+{
+    cout << vertex <<endl;
+    //1.->Take action on vertex after entering the vertex.
+    vis[vertex] = true;
+    for(int child : g[vertex])
+    {
+          cout <<" prnt-> " << vertex <<" child-> " << child << endl;
+          //2.->Take action on child before entering the child node.
+         if(vis[child]) continue;
+    
+          dfs(child);
+  }
+}
+
+int main()
+{
+   int n,m;    //n -> No. of vertex
+   cin>>n>>m;  //m -> No. of Edges
+
+   for(int i=0;i<m;i++)
+   {
+       int x,y;
+       cin>>x>>y;
+       g[x].push_back(y);
+       g[y].push_back(x);
+   }
+   dfs(1);
+}
